@@ -1,0 +1,23 @@
+const productos=[
+    {
+        id:1,
+        productName:"Sandia",
+        price:10,
+        quanty:1,
+        img:"./media/sandia.jpg",
+    },
+    {
+        id:2,
+        productName:"Banana",
+        price:20,
+        quanty:1,
+        img:"./media/banana.jpg",
+    },
+    {
+        id:3,
+        productName:"Birra",
+        price:30,
+        quanty:1,
+        img:"./media/birra.jpg",
+    },
+]

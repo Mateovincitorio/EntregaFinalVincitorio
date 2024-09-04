@@ -37,6 +37,10 @@ transform: scale(1.3,1.5);
 opacity: 1;
 }
 
+.card{
+    margin-top: 100px;
+}
+
 .cart-btn{
     height: 24px;
     width: 24px;
@@ -106,6 +110,11 @@ opacity: 1;
     border-radius: 30%;
 }
 
+.imgProd{
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
 .productoAgregado{
     border-bottom: 1px #000 solid;
 }
@@ -161,35 +170,13 @@ opacity: 1;
     padding-right: 50px;
 }
 
-.buscadorProd{
-    margin-left: 60px;
-    margin-top: 50px;
-    max-width: 250px;
-    width: 100%;
-}
-
-.lupa{
-    cursor: pointer;
-}
-
-.buscador{
-position: relative;
-top: 50px;
-}
-
-.buscadorProd{
-    margin: 50px;
-    margin-right: 10px;
-    padding: 5px;
-    background-color: #00000000;
-    color: wheat;
-    border: 2px  rgba(18, 255, 128, 0.609) solid;
-    border-radius: 10px;
-
-}
-
 .trash{
     cursor: pointer;
     position: absolute;
     right: 100px;
 }
+
+.increase, .decrease{
+    cursor: pointer;
+}
+

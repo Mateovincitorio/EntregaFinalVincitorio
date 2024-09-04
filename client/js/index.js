@@ -1,9 +1,9 @@
 //tomo el valor del div con su id
 const shopContent = document.getElementById("shopContent");
 const modoOscuro = document.getElementById("darkMode");
-
+const trash = document.getElementById("trash")
 localStorage.setItem('darkMode', 'activo')
-const cart = []
+const cart = JSON.parse(localStorage.getItem("carrito")) || []
 
 //recorro el array del archivo "productos.js"
 productos.forEach((product)=>{
@@ -13,7 +13,7 @@ productos.forEach((product)=>{
     content.className="card";
     //le asigno la imagen,nombre y precio a cada product
     content.innerHTML= `
-    <img src="${imagenProduct}">
+    <img class="imgProd" src="${imagenProduct}">
     <h3>${nombreProducto}</h3>
     <p class="price">${precioProducto} $</p>
     `;
@@ -26,11 +26,11 @@ productos.forEach((product)=>{
     
 
     buyButton.addEventListener("click",()=>{
-        const repeted = cart.some((repetedProducts)=>repetedProducts === idProduct);
+        const repeted = cart.some((repetedProducts)=>repetedProducts.id === idProduct);
         if(repeted){
             cart.map((prod)=>{
                 if(prod.id === idProduct){
-                    quantyProd++;
+                    prod.quanty++;
                 }
             })
         }else{
@@ -39,16 +39,10 @@ productos.forEach((product)=>{
                 productName:product.productName,
                 price:product.price,
                 quanty:product.quanty,
-                img:product.img,            
-            });
-            cart.push({
-                id:product.id,
-                productName:product.productName,
-                price:product.price,
-                quanty:product.quanty,
-                img:product.img,            
+                img:product.img,       
             });
         }
+        guardarLocal()
     })
 });
 
@@ -56,6 +50,7 @@ if(localStorage.getItem("darkMode") === "activo"){
     document.body.classList.add("dark-Mode")
     modalContainer.style.backgroundColor="white"
     modalContainer.style.color="black"
+    
 }
 
 modoOscuro.addEventListener("click", () =>{
@@ -70,12 +65,6 @@ modoOscuro.addEventListener("click", () =>{
     }
 });
 
-/*function ordenarElementos(cart){
-    let ordenados = cart.filter((el)=> precioProducto < filtro)
-if (filtro == "" || filtro < 0 || ordenados.length === 0 || isNaN(filtro)) {
-        console.log("No existe ningun producto mas barato que tu filtro");
-    }else{
-        console.log(ordenados);
-    }
-}*/
-
+const guardarLocal = () => {
+    localStorage.setItem("carrito", JSON.stringify(cart))
+}

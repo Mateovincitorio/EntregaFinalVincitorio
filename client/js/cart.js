@@ -1,10 +1,6 @@
 const modalContainer = document.getElementById("modal-container")
 const modalOverlay = document.getElementById("modal-overlay")
 const cartBtn = document.getElementById("cart-btn")
-const increase =document.getElementById("increase")
-const lupa = document.getElementById("lupa")
-const trash = document.getElementById("trash")
-const iva = 0
 
 const mostrarCarrito = () => {
     modalContainer.innerHTML=""
@@ -38,7 +34,7 @@ const mostrarCarrito = () => {
         return
     }
     cart.forEach(product => {
-        const {productName:nombreProducto, price:precioProducto, img:imagenProduct, quanty:quantyProd} = product;
+        const {productName:nombreProducto, price:precioProducto, img:imagenProduct, quanty:quantyProd, id:idProduct} = product;
         const productoAgregado = document.createElement("div")
         productoAgregado.className="productoAgregado"
         productoAgregado.innerHTML=`
@@ -48,43 +44,55 @@ const mostrarCarrito = () => {
             <p class="quantity">${quantyProd}</p>
             <span class="increase">➕</span>
             </div>
-            <p class="productoP">Precio: ${precioProducto}$ <span class="trash" id="trash">🗑️</span></p>
+            <p class="productoP">Precio: ${precioProducto * product.quanty}$ <span class="trash" >🗑️</span></p>
         </div>
         `
         modalContainer.append(productoAgregado)
-    
+
+
+        
+
+        const decrease = productoAgregado.querySelector(".decrease");
+        const increase = productoAgregado.querySelector(".increase");
+
+        decrease.addEventListener("click", () => {
+            if (product.quanty !== 1) {
+                product.quanty--;
+                mostrarCarrito();
+                guardarLocal();
+            }
+        });
+
+        increase.addEventListener("click", () => {
+            product.quanty++;
+            mostrarCarrito();
+            guardarLocal();
+        });
+
+        const trash = productoAgregado.querySelector(".trash")
+        trash.addEventListener("click",()=>{
+            eliminarProd(idProduct)
+        })
+        
     })
-    
-    const sumatoriaTotal = document.createElement("div")
-    sumatoriaTotal.className = "sumatoriaTotal"
-    sumatoriaTotal.innerHTML = `
-    <div class="totalSuma">
-        <h2 class = "h2suma">El total de la compra es de: ${sumatoria(cart)}$</h2>
-    </div>
-    `
-    modalContainer.append(sumatoriaTotal)
+    const total = cart.reduce((acc,el)=>acc + el.price * el.quanty, 0)
+        const sumatoriaTotal = document.createElement("div")
+        sumatoriaTotal.className = "sumatoriaTotal"
+        sumatoriaTotal.innerHTML = `
+        <div class="totalSuma">
+            <h2 class = "h2suma">El total de la compra es de: ${total}$</h2>
+        </div>
+        `
+        modalContainer.append(sumatoriaTotal)
+
+        
 }
 
-lupa.addEventListener("click", function(e){
-    e.preventDefault();
-    const buscador = document.getElementById("buscadorProduct").value.toLocaleLowerCase();
-    
-    
-    const encontrado = productos.find((el) =>el.productName.toLocaleLowerCase().includes(buscador));
-    
-    if (!cart.includes(encontrado)) {
-        cart.push(encontrado);
-    }else{
-        console.log("no hay ningun producto");
-    }
-});
-
-function sumatoria(cart) {
-    const total = cart.reduce((acc, el) => {
-        return acc + el.price;
-    }, iva)
-    console.log("El total de la compra es de: " + total)
-    return total;
+const eliminarProd = (id) => {
+    const elementoAEliminar =  cart.findIndex((el)=> el.id === id)
+    cart.splice(elementoAEliminar,1)
+    mostrarCarrito();
+    guardarLocal();
 }
 cartBtn.addEventListener("click", mostrarCarrito)
 

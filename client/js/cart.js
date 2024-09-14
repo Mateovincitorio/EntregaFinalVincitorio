@@ -96,3 +96,7 @@ const eliminarProd = (id) => {
 }
 cartBtn.addEventListener("click", mostrarCarrito)
 
+fetch("./data/productos.json")
+        .then((res) => res.json())
+        .then((json) => cart.push(res));
+        

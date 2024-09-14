@@ -1,4 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
 
+body{
+    font-family: "Libre Franklin", sans-serif;
+}
 
 .card-products-container{
     margin: auto;
@@ -8,9 +12,13 @@
     text-align: center;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    justify-content: space-evenly;
+    flex-wrap:wrap;
     margin: 10px;
+}
+
+.card-products h3{
+    font-size: smaller;
 }
 
 .card-products img{
@@ -21,7 +29,7 @@
 }
 
 .card-products button{
-    width: 100%;
+    width: 50%;
     height: 40px;
     background-color: rgba(18, 255, 128, 0.609);
     border: 0;
@@ -73,8 +81,7 @@ opacity: 1;
 
 .modal-container{
     display: none;
-    /*background-color: rgb(255, 255, 255);*/
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     max-width: 500px;
@@ -86,6 +93,7 @@ opacity: 1;
     z-index: 1;
     border-radius: 20px;
 }
+
 .modal-close{
     float: right;
     cursor: pointer;   
@@ -108,6 +116,7 @@ opacity: 1;
     height: 80px;
     float: right;
     border-radius: 30%;
+    margin-top: 25px;
 }
 
 .imgProd{

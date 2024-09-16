@@ -89,6 +89,8 @@ modoOscuro.addEventListener("click", () => {
     } else {
         document.body.classList.add("dark-Mode");
         localStorage.setItem("darkMode", "activo");
+        modalContainer.style.backgroundColor = "white";
+        modalContainer.style.color = "black";
     }
 });
 

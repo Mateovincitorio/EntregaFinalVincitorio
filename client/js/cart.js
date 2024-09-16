@@ -80,7 +80,7 @@ const mostrarCarrito = () => {
         sumatoriaTotal.className = "sumatoriaTotal"
         sumatoriaTotal.innerHTML = `
         <div class="totalSuma">
-            <h2 class = "h2suma">El total de la compra es de: ${total}$</h2>
+            <h2 class = "h2suma">Total de su compra: ${total}$</h2>
         </div>
         `
         modalContainer.append(sumatoriaTotal)
@@ -95,8 +95,3 @@ const eliminarProd = (id) => {
     guardarLocal();
 }
 cartBtn.addEventListener("click", mostrarCarrito)
-
-fetch("./data/productos.json")
-        .then((res) => res.json())
-        .then((json) => cart.push(res));
-        

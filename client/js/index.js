@@ -1,6 +1,8 @@
+const carritoIcon = document.getElementById("cart-btn");
 const shopContent = document.getElementById("shopContent");
 const modoOscuro = document.getElementById("darkMode");
-const trash = document.getElementById("trash")
+const trash = document.getElementById("trash");
+
 localStorage.setItem('darkMode', 'activo')
 const cart = JSON.parse(localStorage.getItem("carrito")) || []
 
@@ -31,7 +33,17 @@ const cargarProductos = async () => {
             content.append(buyButton);
         
             // Evento click en el botón de comprar
+
+
             buyButton.addEventListener("click", () => {
+                carritoIcon.classList.remove("cart-btn")
+                carritoIcon.classList.add("carritoIcon");
+
+            setTimeout(() => {
+                carritoIcon.classList.remove("carritoIcon");
+                carritoIcon.classList.add("cart-btn");
+            }, 500);
+
                 const repeted = cart.some((repetedProducts) => repetedProducts.id === idProduct);
                 
                 if (repeted) {

@@ -1,3 +1,4 @@
+
 const modalContainer = document.getElementById("modal-container")
 const modalOverlay = document.getElementById("modal-overlay")
 const cartBtn = document.getElementById("cart-btn")
@@ -44,7 +45,7 @@ const mostrarCarrito = () => {
             <p class="quantity">${quantyProd}</p>
             <span class="increase">➕</span>
             </div>
-            <p class="productoP">Precio: ${precioProducto * product.quanty}$ <span class="trash" >🗑️</span></p>
+            <p class="productoP">Precio: ${cortarDecimales(precioProducto * product.quanty,3)}$ <span class="trash" >🗑️</span></p>
         </div>
         `
         modalContainer.append(productoAgregado)
@@ -76,11 +77,13 @@ const mostrarCarrito = () => {
         
     })
     const total = cart.reduce((acc,el)=>acc + el.price * el.quanty, 0)
+    const totalPrecio = cortarDecimales(total,2)
+   // const totalPrecio = Math.round(total);
         const sumatoriaTotal = document.createElement("div")
         sumatoriaTotal.className = "sumatoriaTotal"
         sumatoriaTotal.innerHTML = `
         <div class="totalSuma">
-            <h2 class = "h2suma">Total de su compra: ${total}$</h2>
+            <h2 class = "h2suma">Total de su compra: ${totalPrecio}$</h2>
         </div>
         `
         modalContainer.append(sumatoriaTotal)
@@ -95,3 +98,8 @@ const eliminarProd = (id) => {
     guardarLocal();
 }
 cartBtn.addEventListener("click", mostrarCarrito)
+
+function cortarDecimales(numero, decimales){
+    const factor = Math.pow(10,decimales)
+    return Math.trunc(numero*factor)/factor;
+}
